@@ -134,7 +134,7 @@ exports = module.exports = function (options) {
         async.mapSeries(securityReqs, function (secReq, cb) { // logical OR - any one can allow
           var secName;
 
-          async.map(Object.keys(secReq), function (name, cb) { // logical AND - all must allow
+          async.mapSeries(Object.keys(secReq), function (name, cb) { // logical AND - all must allow
             var secDef = req.swagger.swaggerVersion === '1.2' ?
                   req.swagger.resourceListing.authorizations[name] :
                   req.swagger.swaggerObject.securityDefinitions[name];
